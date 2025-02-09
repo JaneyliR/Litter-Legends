@@ -6,33 +6,35 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel : ViewModel() {
 
-    fun login(
+    fun loginUser(
         email: String,
         password: String,
-        onResult: (Boolean) -> Unit
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
     ) {
         viewModelScope.launch {
             // 🔹 Simulated login logic (Replace with Firebase Auth)
             if (email == "test@example.com" && password == "password") {
-                onResult(true) // ✅ Login successful
+                onSuccess() // ✅ Login successful
             } else {
-                onResult(false) // ❌ Login failed
+                onError("Invalid email or password") // ❌ Login failed
             }
         }
     }
 
-    fun register(
+    fun registerUser(
         email: String,
         username: String,
         password: String,
-        onResult: (Boolean) -> Unit
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
     ) {
         viewModelScope.launch {
-            // 🔹 Simulated registration logic (Replace with Firebase or DB)
+            // 🔹 Simulated registration logic (Replace with Firebase or database)
             if (email.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty()) {
-                onResult(true) // ✅ Registration successful
+                onSuccess() // ✅ Registration successful
             } else {
-                onResult(false) // ❌ Registration failed
+                onError("Please fill in all fields") // ❌ Registration failed
             }
         }
     }

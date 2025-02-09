@@ -19,8 +19,7 @@ import com.example.litterlegends.viewmodel.ProfileViewModel
 @Composable
 fun LoginScreen(
     navController: NavController,
-    authViewModel: AuthViewModel = viewModel(),
-    profileViewModel: ProfileViewModel = viewModel() // ✅ Ensure ProfileViewModel is available
+    authViewModel: AuthViewModel = viewModel()
 ) {
     var isLoginScreen by remember { mutableStateOf(true) }
     var email by remember { mutableStateOf("") }
@@ -28,25 +27,12 @@ fun LoginScreen(
     var password by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
-    val userProfile by profileViewModel.userProfile.collectAsState()
-
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text("Litter Legends", style = MaterialTheme.typography.headlineMedium)
-
-            // ✅ Show Profile Info If Logged In
-            userProfile?.let {
-                Spacer(modifier = Modifier.height(16.dp))
-                Image(
-                    painter = rememberImagePainter(it.imageUrl),
-                    contentDescription = "Profile Image",
-                    modifier = Modifier.size(80.dp)
-                )
-                Text("Welcome, ${it.status}")
-            }
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -78,22 +64,19 @@ fun LoginScreen(
 
             Button(onClick = {
                 if (isLoginScreen) {
-                    authViewModel.login(email, password) { success ->
-                        if (success) {
-                            profileViewModel.getProfile(email) // ✅ Load Profile after Login
-                            navController.navigate("home")
-                        } else {
-                            errorMessage = "Login failed. Check credentials."
-                        }
-                    }
+                    authViewModel.loginUser(email, password,
+                        onSuccess = {
+                            navController.navigate("home") // ✅ Go to home
+                        },
+                        onError = { errorMessage = it }
+                    )
                 } else {
-                    authViewModel.register(email, username, password) { success ->
-                        if (success) {
-                            isLoginScreen = true
-                        } else {
-                            errorMessage = "Registration failed."
-                        }
-                    }
+                    authViewModel.registerUser(email, username, password,
+                        onSuccess = {
+                            isLoginScreen = true // ✅ Switch to login after registration
+                        },
+                        onError = { errorMessage = it }
+                    )
                 }
             }) {
                 Text(if (isLoginScreen) "Login" else "Register")
