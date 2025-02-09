@@ -13,24 +13,18 @@
         android:theme="@style/Theme.LitterLegends_"
         tools:targetApi="31">
 
-        <!-- ✅ MainActivity (Starts App) -->
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.litterlegends.ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.LitterLegends_">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.LitterLegends_" />
 
-        <!-- ✅ HomeActivity (After Login) -->
         <activity
-            android:name=".HomeActivity"
+            android:name="com.example.litterlegends.ui.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.LitterLegends_" />
+
 
     </application>
 

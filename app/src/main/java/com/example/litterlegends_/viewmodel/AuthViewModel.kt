@@ -5,41 +5,19 @@ import androidx.lifecycle.viewModelScope
 import com.example.litterlegends_.repository.AuthRepository
 import kotlinx.coroutines.launch
 
-class AuthViewModel : ViewModel() {
-    private val authRepository = AuthRepository()
+class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
 
-    fun registerUser(
-        email: String,
-        username: String,
-        password: String,
-        profileImage: String,
-        status: String,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
-    ) {
+    fun registerUser(email: String, username: String, password: String, onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
-            val isRegistered = authRepository.registerUser(email, username, password, profileImage, status)
-            if (isRegistered) {
-                onSuccess()
-            } else {
-                onError("User already exists!")
-            }
+            val success = authRepository.registerUser(email, username, password)
+            onResult(success)
         }
     }
 
-    fun loginUser(
-        email: String,
-        password: String,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
-    ) {
+    fun loginUser(email: String, password: String, onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
-            val isAuthenticated = authRepository.loginUser(email, password)
-            if (isAuthenticated) {
-                onSuccess()
-            } else {
-                onError("Invalid email or password!")
-            }
+            val success = authRepository.loginUser(email, password)
+            onResult(success)
         }
     }
 }

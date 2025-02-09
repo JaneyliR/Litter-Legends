@@ -14,12 +14,12 @@ class AuthRepository {
 
     init {
         val config = RealmConfiguration.Builder(schema = setOf(User::class))
-            .name("litter_legends.realm")
+            .name("litter_legends_.realm")
             .build()
         realm = Realm.open(config)
     }
 
-    suspend fun registerUser(email: String, username: String, password: String, profileImage: String, status: String): Boolean {
+    suspend fun registerUser(email: String, username: String, password: String): Boolean {
         return withContext(Dispatchers.IO) {
             val existingUser = realm.query<User>("email == $0", email).first().find()
             if (existingUser != null) return@withContext false
@@ -28,9 +28,7 @@ class AuthRepository {
                 copyToRealm(User().apply {
                     this.email = email
                     this.username = username
-                    this.password = hashPassword(password) // 🔥 Hashing the password
-                    this.profileImage = profileImage
-                    this.status = status
+                    this.password = hashPassword(password) // ✅ Hashing the password
                 })
             }
             return@withContext true
@@ -40,7 +38,7 @@ class AuthRepository {
     suspend fun loginUser(email: String, password: String): Boolean {
         return withContext(Dispatchers.IO) {
             val user = realm.query<User>("email == $0", email).first().find()
-            return@withContext user != null && verifyPassword(password, user.password) // 🔥 Password verification
+            return@withContext user != null && verifyPassword(password, user.password) // ✅ Verify password
         }
     }
 }
