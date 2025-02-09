@@ -1,2 +1,2 @@
 # Litter-Legends
-The pure realm awaits its heros
+The pure realm awaits its heroes
