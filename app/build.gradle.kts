@@ -40,6 +40,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
+    repositories {
+        google()  // ✅ Required for Android dependencies
+        mavenCentral()  // ✅ Required for most libraries
+    }
+
 }
 
 dependencies {
