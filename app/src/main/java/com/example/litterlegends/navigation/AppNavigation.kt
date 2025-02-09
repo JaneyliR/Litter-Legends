@@ -1,12 +1,12 @@
-package com.example.litterlegends_.navigation
+package com.example.litterlegends.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.litterlegends_.ui.screens.HomeScreen
-import com.example.litterlegends_.ui.screens.LoginScreen
+import com.example.litterlegends.ui.screens.HomeScreen
+import com.example.litterlegends.ui.screens.LoginScreen
 
 @Composable
 fun AppNavigation() {

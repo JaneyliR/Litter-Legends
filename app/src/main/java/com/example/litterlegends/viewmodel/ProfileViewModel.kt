@@ -1,11 +1,10 @@
-package com.example.litterlegends_.viewmodel
+package com.example.litterlegends.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.litterlegends_.model.UserProfile
+import com.example.litterlegends.model.UserProfile
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
-import io.realm.kotlin.ext.query
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

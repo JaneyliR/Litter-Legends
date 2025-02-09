@@ -1,8 +1,8 @@
-package com.example.litterlegends_.repository
+package com.example.litterlegends.repository
 
-import com.example.litterlegends_.utils.SecurityUtils.hashPassword
-import com.example.litterlegends_.utils.SecurityUtils.verifyPassword
-import com.example.litterlegends_.model.User
+import com.example.litterlegends.utils.SecurityUtils.hashPassword
+import com.example.litterlegends.utils.SecurityUtils.verifyPassword
+import com.example.litterlegends.model.User
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import io.realm.kotlin.ext.query

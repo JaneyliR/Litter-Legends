@@ -1,4 +1,4 @@
-package com.example.litterlegends_
+package com.example.litterlegends
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

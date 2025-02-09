@@ -1,4 +1,4 @@
-package com.example.litterlegends_
+package com.example.litterlegends
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

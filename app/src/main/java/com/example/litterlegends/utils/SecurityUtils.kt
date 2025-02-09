@@ -1,4 +1,4 @@
-package com.example.litterlegends_.utils
+package com.example.litterlegends.utils
 
 import at.favre.lib.crypto.bcrypt.BCrypt
 

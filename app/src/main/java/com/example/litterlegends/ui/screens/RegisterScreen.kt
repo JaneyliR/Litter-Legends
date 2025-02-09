@@ -1,4 +1,4 @@
-package com.example.litterlegends_.ui.screens
+package com.example.litterlegends.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,7 +26,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.litterlegends_.viewmodel.AuthViewModel
+import com.example.litterlegends.viewmodel.AuthViewModel
 
 @Composable
 fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {

@@ -1,8 +1,8 @@
-package com.example.litterlegends_.viewmodel
+package com.example.litterlegends.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.litterlegends_.repository.AuthRepository
+import com.example.litterlegends.repository.AuthRepository
 import kotlinx.coroutines.launch
 
 class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {

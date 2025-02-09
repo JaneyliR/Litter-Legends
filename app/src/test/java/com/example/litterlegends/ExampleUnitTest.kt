@@ -1,4 +1,4 @@
-package com.example.litterlegends_
+package com.example.litterlegends
 
 import org.junit.Test
 
