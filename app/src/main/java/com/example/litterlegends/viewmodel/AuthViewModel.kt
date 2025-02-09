@@ -2,22 +2,38 @@ package com.example.litterlegends.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.litterlegends.repository.AuthRepository
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
+class AuthViewModel : ViewModel() {
 
-    fun registerUser(email: String, username: String, password: String, onResult: (Boolean) -> Unit) {
+    fun login(
+        email: String,
+        password: String,
+        onResult: (Boolean) -> Unit
+    ) {
         viewModelScope.launch {
-            val success = authRepository.registerUser(email, username, password)
-            onResult(success)
+            // 🔹 Simulated login logic (Replace with Firebase Auth)
+            if (email == "test@example.com" && password == "password") {
+                onResult(true) // ✅ Login successful
+            } else {
+                onResult(false) // ❌ Login failed
+            }
         }
     }
 
-    fun loginUser(email: String, password: String, onResult: (Boolean) -> Unit) {
+    fun register(
+        email: String,
+        username: String,
+        password: String,
+        onResult: (Boolean) -> Unit
+    ) {
         viewModelScope.launch {
-            val success = authRepository.loginUser(email, password)
-            onResult(success)
+            // 🔹 Simulated registration logic (Replace with Firebase or DB)
+            if (email.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty()) {
+                onResult(true) // ✅ Registration successful
+            } else {
+                onResult(false) // ❌ Registration failed
+            }
         }
     }
 }

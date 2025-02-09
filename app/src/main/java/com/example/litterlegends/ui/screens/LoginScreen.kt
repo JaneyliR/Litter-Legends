@@ -20,7 +20,7 @@ import com.example.litterlegends.viewmodel.ProfileViewModel
 fun LoginScreen(
     navController: NavController,
     authViewModel: AuthViewModel = viewModel(),
-    profileViewModel: ProfileViewModel = viewModel() // ✅ Add ProfileViewModel
+    profileViewModel: ProfileViewModel = viewModel() // ✅ Ensure ProfileViewModel is available
 ) {
     var isLoginScreen by remember { mutableStateOf(true) }
     var email by remember { mutableStateOf("") }
@@ -28,8 +28,7 @@ fun LoginScreen(
     var password by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
-    // ✅ Load user profile if authenticated
-    val userProfile = profileViewModel.getProfile(email)
+    val userProfile by profileViewModel.userProfile.collectAsState()
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -81,6 +80,7 @@ fun LoginScreen(
                 if (isLoginScreen) {
                     authViewModel.login(email, password) { success ->
                         if (success) {
+                            profileViewModel.getProfile(email) // ✅ Load Profile after Login
                             navController.navigate("home")
                         } else {
                             errorMessage = "Login failed. Check credentials."

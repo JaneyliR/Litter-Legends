@@ -2,29 +2,30 @@ package com.example.litterlegends.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.litterlegends.model.UserProfile
-import io.realm.kotlin.Realm
-import io.realm.kotlin.RealmConfiguration
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+data class UserProfile(
+    val email: String,
+    val imageUrl: String,
+    val status: String
+)
+
 class ProfileViewModel : ViewModel() {
-    private val realm: Realm
 
-    init {
-        val config = RealmConfiguration.Builder(schema = setOf(UserProfile::class))
-            .name("user_profiles.realm")
-            .build()
-        realm = Realm.open(config)
-    }
+    private val _userProfile = MutableStateFlow<UserProfile?>(null)
+    val userProfile: StateFlow<UserProfile?> = _userProfile
 
-    fun saveProfile(imageUrl: String, status: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            realm.writeBlocking {
-                copyToRealm(UserProfile().apply {
-                    this.imageUrl = imageUrl
-                    this.status = status
-                })
+    fun getProfile(email: String) {
+        viewModelScope.launch {
+            // 🔹 Simulate fetching user profile from a database (Replace with Firebase or local DB)
+            if (email.isNotEmpty()) {
+                _userProfile.value = UserProfile(
+                    email = email,
+                    imageUrl = "https://example.com/default-profile.jpg", // 🔹 Replace with actual image
+                    status = "Litter Hero" // 🔹 Default status
+                )
             }
         }
     }
